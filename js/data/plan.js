@@ -108,6 +108,6 @@ export const PLAN = [
       'Planear excursiones con el futuro básico.',
       'Despedirte y agradecer al final del viaje.',
     ],
-    lessons: [],
+    lessons: [29, 30, 31, 32],
   },
 ];
