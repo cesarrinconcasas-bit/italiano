@@ -51,7 +51,7 @@ export const PLAN = [
       'Pedir y entender direcciones.',
       'Usar el autobús, el metro y el taxi.',
     ],
-    lessons: [],
+    lessons: [9, 10, 11, 12],
   },
   {
     week: 4,
