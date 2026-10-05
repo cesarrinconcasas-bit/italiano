@@ -74,7 +74,7 @@ export const PLAN = [
       'Visitar museos e iglesias respetando las reglas.',
       'Pedir que te tomen una foto.',
     ],
-    lessons: [],
+    lessons: [17, 18, 19, 20],
   },
   {
     week: 6,
