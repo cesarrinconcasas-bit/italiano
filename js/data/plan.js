@@ -85,7 +85,7 @@ export const PLAN = [
       'Pedir ayuda en una emergencia y denunciar una pérdida o robo.',
       'Reclamar con educación un error en la cuenta.',
     ],
-    lessons: [],
+    lessons: [21, 22, 23, 24],
   },
   {
     week: 7,
