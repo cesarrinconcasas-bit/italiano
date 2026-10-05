@@ -64,6 +64,11 @@ export function hasItVoice() {
   return itVoices().length > 0;
 }
 
+// ¿Se puede oír italiano en este dispositivo? Si no, los ejercicios de escuchar muestran el texto.
+export function canSpeak() {
+  return supported && hasItVoice();
+}
+
 let token = 0;
 
 export function stop() {

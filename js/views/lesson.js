@@ -274,7 +274,8 @@ export function render(main, { id }) {
       speech.speak(ex.audio);
     }
     if (ex.ita) put(body, h('p', { class: 'ex-sentence', lang: 'it' }, ex.ita));
-    else if (ex.audio && !ex.audioOnly) put(body, h('p', { class: 'ex-sentence', lang: 'it' }, ex.audio));
+    else if (ex.audio && (!ex.audioOnly || !speech.canSpeak())) put(body, h('p', { class: 'ex-sentence', lang: 'it' }, ex.audio));
+    if (ex.audioOnly && !speech.canSpeak()) put(body, h('p', { class: 'muted small' }, 'No hay voz italiana en este dispositivo: lee el texto.'));
     const opts = h('div', { class: 'options' });
     ex.options.forEach((o) => {
       const b = btn(o, () => {

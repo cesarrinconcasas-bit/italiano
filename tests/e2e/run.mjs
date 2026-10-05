@@ -25,6 +25,11 @@ scenarios.falseFriends = async ({ url }) => {
     await untilStep(b, 'Gramática');
     const txt = await b.ev(`document.querySelector('[data-test=false-friends]')?.innerText || ''`);
     assert.match(txt, /salire/, 'falsos amigos en Gramática');
+    // Con voz italiana, el ejercicio de escuchar no muestra el texto (hay que oírlo).
+    if (await b.ev(`speechSynthesis.getVoices().some((v) => /^it[-_]IT/i.test(v.lang))`)) {
+      await untilStep(b, 'Ejercicios');
+      assert.equal(await b.ev(`document.querySelector('.ex-sentence')`), null, 'escuchar sin texto cuando hay voz');
+    }
     assert.deepEqual(b.errors, []);
   } finally { await b.close(); }
 };
@@ -199,6 +204,31 @@ scenarios.screens = async ({ url }) => {
       await untilStep(b, 'Ejercicios'); await shot('ejercicio');
     }
     console.log(`  capturas en ${dir}`);
+    assert.deepEqual(b.errors, []);
+  } finally { await b.close(); }
+};
+
+// Sin voz italiana, los ejercicios y repasos "de escuchar" muestran el texto para poder responder.
+scenarios.noVoiceText = async ({ url }) => {
+  const b = await launch();
+  try {
+    await b.send('Page.addScriptToEvaluateOnNewDocument', { source: `speechSynthesis.getVoices = () => [];` });
+    await b.goto(`${url}/#/leccion/1`);
+    await untilStep(b, 'Ejercicios');
+    assert.equal(await b.ev(`document.querySelector('.ex-prompt').textContent`), 'Escucha. ¿Qué significa?');
+    const shown = await b.ev(`document.querySelector('.ex-sentence')?.textContent || ''`);
+    assert.ok(shown.length > 0, 'muestra el italiano del ejercicio de escuchar');
+    // Repaso: dos tarjetas pendientes; la segunda es de "escuchar".
+    const today = await b.ev(`(() => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); })()`);
+    const card = { box: 1, due: today, reps: 1, lapses: 0, last: null };
+    await b.ev(`(() => { const s = JSON.parse(localStorage['italiano-cesar-v1']); s.cards = { '1:ciao': ${JSON.stringify(card)}, '1:grazie': ${JSON.stringify(card)} }; localStorage['italiano-cesar-v1'] = JSON.stringify(s); })()`);
+    await b.send('Page.reload'); await b.sleep(700);
+    await b.goto(`${url}/#/repaso`);
+    await b.ev(`document.querySelector('[data-act=reveal]').click()`);
+    await b.ev(`document.querySelector('[data-act=grade-good]').click()`);
+    await b.sleep(200);
+    const q = await b.ev(`document.querySelector('.question').innerText`);
+    assert.match(q, /ciao|grazie/, 'el repaso de escuchar muestra la palabra en italiano');
     assert.deepEqual(b.errors, []);
   } finally { await b.close(); }
 };

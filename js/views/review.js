@@ -75,6 +75,7 @@ export function render(main, params) {
           h('p', { class: 'item-es big' }, item.es))
       : h('div', { class: 'question' },
           h('p', { class: 'line-who' }, 'Escucha. ¿Qué significa? Piénsalo y luego revisa.'),
+          speech.canSpeak() ? null : h('p', { class: 'item-ita big', lang: 'it' }, item.ita),
           h('div', { class: 'audio-row' },
             btn('Escuchar', () => speech.speak(text), { cls: 'btn-audio big', ic: 'play', attrs: { 'data-act': 'rev-listen' } }),
             btn('Lento', () => speech.speak(text, { slow: true }), { cls: 'btn-audio big', ic: 'slow' }),
