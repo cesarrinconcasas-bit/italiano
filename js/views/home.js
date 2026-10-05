@@ -1,5 +1,6 @@
 import { h, icon, put } from '../ui.js';
 import { get } from '../store.js';
+import * as speech from '../speech.js';
 import { LESSONS } from '../data/lessons.js';
 import { PLAN } from '../data/plan.js';
 import { nextLesson, lessonState, dueCount, streak, todayGoals, learnedCount } from '../common.js';
@@ -24,6 +25,20 @@ export function render(main) {
       h('p', { class: 'muted' }, '15 a 20 minutos al día son suficientes. Lo importante es no dejar de practicar.'),
     ),
   );
+
+  // Sin voz italiana los botones de audio no suenan: avisar y explicar cómo descargarla.
+  const voiceSlot = h('div');
+  put(main, voiceSlot);
+  if (speech.supported) {
+    speech.voicesReady().then(() => {
+      if (speech.hasItVoice() || !voiceSlot.isConnected) return;
+      put(voiceSlot, h('div', { class: 'card warn', 'data-test': 'no-voice' },
+        h('h2', null, 'Falta la voz italiana'),
+        h('p', null, 'Este dispositivo no tiene una voz en italiano, así que los botones de audio no sonarán.'),
+        h('p', null, 'iPhone: Ajustes › Accesibilidad › Contenido leído › Voces › Italiano → descarga Alice, Federica o Luca (mejor la versión "mejorada"). Mac: Ajustes del Sistema › Accesibilidad › Contenido leído › Voz del sistema › Gestionar voces › Italiano. Luego vuelve a abrir la app.'),
+      ));
+    });
+  }
 
   // Acción principal
   if (next) {

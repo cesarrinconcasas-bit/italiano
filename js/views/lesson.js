@@ -126,6 +126,17 @@ export function render(main, { id }) {
           audioControls(ex.say || ex.ita, { record: false, repeat: false }),
         ),
       ),
+      lesson.falseFriends?.length
+        ? h('div', { class: 'card false-friends', 'data-test': 'false-friends' },
+            h('h2', null, 'Ojo: falsos amigos'),
+            lesson.falseFriends.map((f) =>
+              h('div', { class: 'ff' },
+                h('p', null, h('strong', { lang: 'it' }, f.ita), ' = ', f.es),
+                h('p', { class: 'muted' }, f.trap),
+                audioControls(f.ita, { record: false, repeat: false }),
+              )),
+          )
+        : null,
       nav(() => go(4), 'Continuar'),
     );
   }

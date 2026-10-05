@@ -52,8 +52,8 @@ export async function launch({ downloads } = {}) {
     await sleep(700);
   }
   async function close() {
-    try { await send('Browser.close'); } catch {}
-    await sleep(500);
+    await Promise.race([send('Browser.close'), sleep(1500)]);
+    ws.close();
     proc.kill();
     try { rmSync(profile, { recursive: true, force: true }); } catch {}
   }

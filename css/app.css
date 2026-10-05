@@ -331,3 +331,6 @@ details.card[open] > summary { margin-bottom: .6rem; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* Falsos amigos */
+.false-friends .ff + .ff { border-top: 1px solid var(--border); padding-top: .8rem; margin-top: .8rem; }
