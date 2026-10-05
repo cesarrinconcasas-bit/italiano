@@ -11,7 +11,8 @@ están completas y se pueden usar.** No hay botones de adorno ni calificaciones 
 
 ## Decisiones
 - **Base:** se copia el motor de "Inglés con Karla" (`/Volumes/storage/app/ingles`, commit
-  `f1302ad`) a `/Volumes/storage/app/italiano` y se adapta. **La app de Karla no se modifica.**
+  `f1302ad`) a `/Volumes/storage/app/italiano` y se adapta. **La app de Karla no se modifica**, salvo una
+  línea de su `sw.js` (ver "Separación entre apps").
   No hay motor compartido entre las dos apps.
 - **Tecnología:** igual que la app de inglés. Es una app web estática (HTML/CSS/JS con módulos
   ES), sin paso de compilación ni dependencias en ejecución. Usa PWA (manifest + service worker)
@@ -36,6 +37,16 @@ están completas y se pueden usar.** No hay botones de adorno ni calificaciones 
   banderas como ícono principal).
 - **Sin:** pagos, cuentas, APIs externas, audios ajenos ni cursos copiados. La app no califica
   la pronunciación: Cesar compara su grabación con el modelo.
+
+## Separación entre apps (pedido de Cesar: "que no se crucen")
+Las dos apps vivirán en el mismo dominio (`cesarrinconcasas-bit.github.io`), así que el navegador les
+da el mismo almacenamiento. Para que no se crucen:
+- Progreso: `italiano-cesar-v1` frente a `ingles-karla-v1` (localStorage).
+- Audios propios: base IndexedDB `italiano-cesar` frente a `ingles-karla`.
+- Copia de seguridad: cada app rechaza la copia de la otra.
+- Service worker: alcance `/italiano/` frente a `/ingles-karla/`; cachés con prefijo propio, y cada uno
+  borra solo las suyas. El `sw.js` de inglés hoy borra todas las cachés ajenas: se corrige solo esa
+  línea y se pide confirmación antes de publicar ese cambio en la app de Karla.
 
 ## Contenido: 32 lecciones (4 por semana)
 Cada lección trae: objetivo, vocabulario (8–12 elementos), frases con traducción, gramática
