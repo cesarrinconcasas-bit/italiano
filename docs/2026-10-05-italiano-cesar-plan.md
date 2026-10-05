@@ -168,7 +168,7 @@ const WRONG = [
   [/\bpuo\b/i, 'può'], [/\bgia\b/i, 'già'], [/\bcosi\b/i, 'così'], [/\bpero\b/i, 'però'],
   [/\b(lunedi|martedi|mercoledi|giovedi|venerdi)\b/i, 'lunedì…venerdì'], [/\bsi,/i, 'sì,'],
   [/\be'/i, 'è'], [/\bqual'è\b/i, "qual è"], [/\bun'(?=[bcdfghlmnpqrstvz])/i, 'un (masc.)'],
-  [/\bpo'\b(?!)/, ''], [/\bquì\b|\bquà\b/i, 'qui / qua sin acento'], [/’/, "usar ' recto"],
+  [/\bquì\b|\bquà\b/i, 'qui / qua sin acento'], [/’/, "usar ' recto"],
   [/\bperfavore\b/i, 'per favore'], [/\bbuon giorno\b/i, 'buongiorno'], [/\bbuona sera\b/i, 'buonasera'],
 ];
 
@@ -188,7 +188,7 @@ function italianTexts(l) {
 
 test('ortografía italiana: sin acentos olvidados ni formas típicas erróneas', () => {
   const problems = [];
-  for (const l of LESSONS) for (const t of italianTexts(l)) for (const [re, fix] of WRONG.filter(([, f]) => f))
+  for (const l of LESSONS) for (const t of italianTexts(l)) for (const [re, fix] of WRONG)
     if (re.test(t)) problems.push(`L${l.id}: "${t}" → ${fix}`);
   assert.deepEqual(problems, []);
 });
@@ -198,7 +198,6 @@ test('nada de "en" heredado del inglés en los datos', () => {
 });
 ```
 
-(Quitar del arreglo la línea `[/\bpo'\b(?!)/, '']`: `po'` es correcto en italiano y la entrada vacía se filtra; no se escribe en el archivo final.)
 
 - [ ] **Step 4: Ejecutar las pruebas y comprobar que fallan**
 
@@ -510,7 +509,7 @@ Cada task crea `js/data/weekN.js` exportando `WEEKN` (la semana 1 añade las lec
 **Contenido obligatorio por lección** (vocabulario clave · frases clave · gramática · falsos amigos · diálogo):
 
 **Task 4 — Semana 1** (`week1.js`, lecciones 2–4; `register: 'lei'`)
-- **L2 *Non capisco*** — vocab: uno…dieci como números del 0 al 10 en un solo item cada uno no; usar: `zero, uno, due, tre, cinque, dieci, venti, capire, parlare, lentamente` · frases: `Non capisco.` `Può ripetere, per favore?` `Più lentamente, per favore.` `Parla inglese?` `Parla spagnolo?` `Come si dice … in italiano?` `Che cosa significa?` · gram.: negación con `non` antes del verbo (`Non parlo italiano`), números 0–20 (tabla en `explain`) · falsos amigos: `parlare`≠"parlar"…; usar `caldo` (caliente) y `burro` (mantequilla) · diálogo: en la taquilla de un museo, Cesar no entiende el precio y pide que lo repitan despacio.
+- **L2 *Non capisco*** — vocab: `zero, uno, due, tre, cinque, dieci, venti, capire, parlare, lentamente` · frases: `Non capisco.` `Può ripetere, per favore?` `Più lentamente, per favore.` `Parla inglese?` `Parla spagnolo?` `Come si dice … in italiano?` `Che cosa significa?` · gram.: negación con `non` antes del verbo (`Non parlo italiano`), números 0–20 (tabla en `explain`) · falsos amigos: `caldo` (caliente) y `burro` (mantequilla) · diálogo: en la taquilla de un museo, Cesar no entiende el precio y pide que lo repitan despacio.
 - **L3 *Al bar*** — vocab: `un caffè, un cappuccino, un cornetto, una spremuta, l'acqua, il bancone, il tavolo, lo scontrino, la cassa, lo zucchero` · frases: `Vorrei un caffè, per favore.` `Un cappuccino e un cornetto.` `Al banco o al tavolo?` `Quanto costa?` `Pago alla cassa?` `Ecco lo scontrino.` `Senza zucchero.` · gram.: `un/uno/una/un'` y `vorrei` (= quisiera) · falsos amigos: `caffè` = espresso (no café americano); `latte` = leche (pedir "un latte" da un vaso de leche) · diálogo: Cesar paga en la caja y pide en la barra.
 - **L4 *Piacere, sono Cesar*** — vocab: `americano/americana, colombiano/colombiana, messicano/messicana, gli Stati Uniti, la Florida, il lavoro, la vacanza, il marito, la moglie, in vacanza` (ajustar a 8–12) · frases: `Sono di Miami.` `Sono americano, ma parlo spagnolo.` `Sono qui in vacanza.` `Sono qui con mia moglie.` `Di dove è?` `Che lavoro fa?` `Sono agente di assicurazioni.` · gram.: adjetivos de nacionalidad `-o/-a` y `-e` invariable (`inglese`), `essere` completo en singular · falsos amigos: `la vacanza` (singular habitual: "in vacanza"); `simpatico`≈amable (igual) — usar en su lugar `fermare` (detener) vs. "firmar" (`firmare`) · diálogo: conversación en una terraza con una pareja italiana (aquí `register: 'lei'`, aunque al final ellos proponen "diamoci del tu").
 
@@ -546,7 +545,7 @@ Cada task crea `js/data/weekN.js` exportando `WEEKN` (la semana 1 añade las lec
 
 **Task 10 — Semana 7** (`week7.js`, lecciones 25–28; `register: 'tu'`)
 - **L25 *Fare amicizia*** — vocab: `l'amico, l'amica, il calcio, la musica, viaggiare, cucinare, ballare, il fine settimana, anche, invece` · frases: `Mi piace viaggiare.` `Mi piacciono i cani.` `Ti piace il calcio?` `Anche a me!` `A me no.` `Che cosa fai nel tempo libero?` `Diamoci del tu!` · gram.: `mi piace` + singular/infinitivo, `mi piacciono` + plural; `ti` / `le` · falsos amigos: `l'esposizione`… usar `la fermata` vs. "firmada"…; usar `annoiato` (aburrido) y `noioso` · diálogo: charla con un italiano en un tren largo.
-- **L26 *Famiglia e lavoro*** — vocab: `la famiglia, la moglie, i figli, il figlio, la figlia, il fratello, la sorella, l'ufficio, il cliente, l'azienda` · frases: `Sono sposato.` `Mia moglie si chiama Karla.` `Abbiamo … figli.` → no: usar `Hai figli?` `Lavoro nelle assicurazioni.` `Ho un'agenzia in Florida.` `Aiuto le persone con l'assicurazione sanitaria.` `E tu, che lavoro fai?` · gram.: posesivos con familia (sin artículo en singular: `mia moglie`, con artículo en plural: `i miei figli`) · falsos amigos: `i parenti` (familiares, no solo padres), `la ditta`… usar `l'azienda` (empresa) · diálogo: cena con una familia italiana. (No se inventan datos de los hijos de Cesar: el diálogo usa solo a Karla y su trabajo.)
+- **L26 *Famiglia e lavoro*** — vocab: `la famiglia, la moglie, i figli, il figlio, la figlia, il fratello, la sorella, l'ufficio, il cliente, l'azienda` · frases: `Sono sposato.` `Mia moglie si chiama Karla.` `Hai figli?` `Lavoro nelle assicurazioni.` `Ho un'agenzia in Florida.` `Aiuto le persone con l'assicurazione sanitaria.` `E tu, che lavoro fai?` · gram.: posesivos con familia (sin artículo en singular: `mia moglie`, con artículo en plural: `i miei figli`) · falsos amigos: `i parenti` (familiares, no solo padres), `la ditta`… usar `l'azienda` (empresa) · diálogo: cena con una familia italiana. (No se inventan datos de los hijos de Cesar: el diálogo usa solo a Karla y su trabajo.)
 - **L27 *Com'è andata la giornata?*** — vocab: `ieri, stamattina, oggi pomeriggio, visitare, mangiare, comprare, camminare, vedere, fare, stanco` · frases: `Ho visitato il Colosseo.` `Abbiamo mangiato una pizza buonissima.` `Ho comprato dei regali.` `Abbiamo camminato tanto.` `Che cosa hai fatto oggi?` `Ho visto il Pantheon.` `Sono stanco morto!` · gram.: *passato prossimo* con `avere` (`ho + -ato/-uto/-ito`, irregulares `fatto`, `visto`) · falsos amigos: `stanco` (cansado, no "estanco") · diálogo: contar el día a un amigo por la noche.
 - **L28 *Dove sei stato?*** — vocab: `andare, tornare, partire, arrivare, restare, l'anno scorso, la settimana scorsa, il viaggio, la prima volta, già` · frases: `Sono andato a Venezia.` `Siamo arrivati ieri.` `Sei mai stato in Sicilia?` `È la prima volta in Italia.` `Siamo rimasti tre giorni.` `Sono già stato a Roma.` `Torniamo a casa domenica.` · gram.: *passato prossimo* con `essere` y la concordancia (`sono andato`, `mia moglie è andata`, `siamo andati`) · falsos amigos: `restare` (quedarse, no restar) · diálogo: intercambiar experiencias de viaje.
 
