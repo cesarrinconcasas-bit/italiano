@@ -5,8 +5,9 @@ import { WEEK3 } from './week3.js';
 import { WEEK4 } from './week4.js';
 import { WEEK5 } from './week5.js';
 import { WEEK6 } from './week6.js';
+import { WEEK7 } from './week7.js';
 
-export const LESSONS = [...WEEK1, ...WEEK2, ...WEEK3, ...WEEK4, ...WEEK5, ...WEEK6].sort((a, b) => a.id - b.id);
+export const LESSONS = [...WEEK1, ...WEEK2, ...WEEK3, ...WEEK4, ...WEEK5, ...WEEK6, ...WEEK7].sort((a, b) => a.id - b.id);
 
 export function getLesson(id) {
   return LESSONS.find((l) => l.id === Number(id)) || null;

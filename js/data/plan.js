@@ -96,7 +96,7 @@ export const PLAN = [
       'Contar qué hiciste hoy (pasado con avere).',
       'Contar adónde fuiste (pasado con essere).',
     ],
-    lessons: [],
+    lessons: [25, 26, 27, 28],
   },
   {
     week: 8,

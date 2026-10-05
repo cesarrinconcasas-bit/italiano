@@ -7,7 +7,7 @@ const FILES = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css',
   'js/app.js', 'js/ui.js', 'js/store.js', 'js/srs.js', 'js/check.js', 'js/exercises.js', 'js/common.js',
   'js/speech.js', 'js/recorder.js', 'js/audiodb.js',
-  'js/data/lessons.js', 'js/data/plan.js', 'js/data/week1.js', 'js/data/week2.js', 'js/data/week3.js', 'js/data/week4.js', 'js/data/week5.js', 'js/data/week6.js',
+  'js/data/lessons.js', 'js/data/plan.js', 'js/data/week1.js', 'js/data/week2.js', 'js/data/week3.js', 'js/data/week4.js', 'js/data/week5.js', 'js/data/week6.js', 'js/data/week7.js',
   'js/views/home.js', 'js/views/lessons.js', 'js/views/lesson.js', 'js/views/review.js',
   'js/views/progress.js', 'js/views/audios.js', 'js/views/more.js',
   'icons/apple-touch-icon.png', 'icons/icon-192.png', 'icons/icon-512.png',
