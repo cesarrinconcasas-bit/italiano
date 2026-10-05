@@ -140,12 +140,15 @@ test('store: claves propias y rechaza la copia de la app de inglés', async () =
   assert.ok(mem.has('italiano-cesar-v1') && !mem.has('ingles-karla-v1'));
 });
 
-test('plan: 8 semanas; lecciones referidas existen', () => {
+test('plan: 8 semanas con 4 lecciones cada una, todas existentes', () => {
+  assert.equal(LESSONS.length, 32);
   assert.equal(PLAN.length, 8);
-  const ids = new Set(LESSONS.map((l) => l.id));
-  for (const w of PLAN) for (const id of w.lessons || []) assert.ok(ids.has(id));
-  const planned = PLAN.flatMap((w) => w.lessons || []);
-  for (const l of LESSONS) assert.ok(planned.includes(l.id), `L${l.id} no está en el plan`);
+  PLAN.forEach((w, i) => {
+    assert.equal(w.week, i + 1);
+    assert.deepEqual(w.lessons, [1, 2, 3, 4].map((n) => i * 4 + n));
+    assert.ok(w.title && w.level && w.canDo.length >= 3);
+  });
+  for (const l of LESSONS) assert.equal(l.week, Math.ceil(l.id / 4), `L${l.id} semana`);
 });
 
 test('sw.js: cachea todos los js y solo borra sus propias cachés', () => {

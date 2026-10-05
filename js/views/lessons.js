@@ -37,18 +37,12 @@ export function render(main) {
         h('span', { class: 'pill' }, w.level),
       ),
       h('p', { class: 'week-title' }, w.title),
+      h('details', { class: 'planned' },
+        h('summary', { class: 'muted small' }, 'Al terminar la semana podrás…'),
+        h('ul', { class: 'can-do' }, w.canDo.map((c) => h('li', null, c))),
+      ),
     );
-    if (w.lessons) {
-      w.lessons.map(getLesson).forEach((l) => put(sec, lessonCard(l)));
-    } else {
-      put(sec, 
-        h('div', { class: 'planned' },
-          h('p', { class: 'muted small' }, 'Próximamente. Lo que aprenderás:'),
-          h('ul', { class: 'can-do' }, w.canDo.map((c) => h('li', null, c))),
-          h('p', { class: 'muted small' }, 'Ejemplos: ', w.topics.join(' · ')),
-        ),
-      );
-    }
+    w.lessons.map(getLesson).forEach((l) => put(sec, lessonCard(l)));
     put(main, sec);
   }
 }

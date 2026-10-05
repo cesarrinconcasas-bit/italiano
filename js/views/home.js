@@ -55,8 +55,8 @@ export function render(main) {
       ),
     );
   } else {
-    put(main, h('div', { class: 'card' }, h('h2', null, '¡Terminaste todas las lecciones disponibles!'),
-      h('p', null, 'Sigue con el repaso diario y repite las conversaciones. Las siguientes semanas del plan están en "Lecciones".')));
+    put(main, h('div', { class: 'card' }, h('h2', null, '¡Terminaste las 32 lecciones!'),
+      h('p', null, 'Ya tienes el italiano para tu viaje. Sigue con el repaso diario y repite las conversaciones antes de viajar. Buon viaggio!')));
   }
 
   put(main, 
