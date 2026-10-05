@@ -28,7 +28,7 @@ export const PLAN = [
       'Pedir un café en un bar italiano.',
       'Presentarte: de dónde eres y a qué te dedicas.',
     ],
-    lessons: [1],
+    lessons: [1, 2, 3, 4],
   },
   {
     week: 2,
