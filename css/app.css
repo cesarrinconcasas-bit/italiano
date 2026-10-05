@@ -1,17 +1,17 @@
 /* Italiano per Cesar — diseño para adulto: letra grande, botones grandes, colores cálidos y calmados. */
 :root {
-  --bg: #f7f4ee;
+  --bg: #f8f5ef;
   --surface: #ffffff;
-  --surface-2: #efeae1;
-  --text: #1c2422;
-  --muted: #56625e;
-  --border: #dcd4c7;
-  --primary: #0f6e66;
-  --primary-hover: #0b5a53;
+  --surface-2: #efe9df;
+  --text: #1d2420;
+  --muted: #56605a;
+  --border: #ddd5c8;
+  --primary: #1e6b47;
+  --primary-hover: #17583a;
   --primary-ink: #ffffff;
-  --primary-soft: #ddf0ec;
-  --rec: #c2410c;
-  --rec-soft: #fde8dc;
+  --primary-soft: #dcefe4;
+  --rec: #b8432d;
+  --rec-soft: #fbe6e0;
   --ok: #146c43;
   --ok-soft: #e1f3e8;
   --try: #8a5300;
@@ -25,18 +25,18 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0f1716;
-    --surface: #172221;
-    --surface-2: #1f2d2b;
-    --text: #eef3f1;
-    --muted: #a7b6b1;
-    --border: #2e3f3c;
-    --primary: #4fc3b5;
-    --primary-hover: #6fd3c6;
-    --primary-ink: #052421;
-    --primary-soft: #173a36;
-    --rec: #ff9a66;
-    --rec-soft: #3d2216;
+    --bg: #0f1512;
+    --surface: #16201b;
+    --surface-2: #1e2b25;
+    --text: #eef3f0;
+    --muted: #a6b4ad;
+    --border: #2c3c34;
+    --primary: #5cc493;
+    --primary-hover: #7ad4a9;
+    --primary-ink: #06210f;
+    --primary-soft: #173528;
+    --rec: #ff9c84;
+    --rec-soft: #3d1f18;
     --ok: #6fd69b;
     --ok-soft: #153223;
     --try: #f3bb5c;
@@ -48,8 +48,8 @@
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0f1716; --surface: #172221; --surface-2: #1f2d2b; --text: #eef3f1; --muted: #a7b6b1; --border: #2e3f3c;
-  --primary: #4fc3b5; --primary-hover: #6fd3c6; --primary-ink: #052421; --primary-soft: #173a36; --rec: #ff9a66; --rec-soft: #3d2216;
+  --bg: #0f1512; --surface: #16201b; --surface-2: #1e2b25; --text: #eef3f0; --muted: #a6b4ad; --border: #2c3c34;
+  --primary: #5cc493; --primary-hover: #7ad4a9; --primary-ink: #06210f; --primary-soft: #173528; --rec: #ff9c84; --rec-soft: #3d1f18;
   --ok: #6fd69b; --ok-soft: #153223; --try: #f3bb5c; --try-soft: #3a2c12; --danger: #ff8f80; --focus: #8fb4ff; color-scheme: dark;
 }
 

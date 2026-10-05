@@ -5,6 +5,7 @@ import { checkTyped, normalize, tokenize } from '../js/check.js';
 import { buildExercises, findCardFor } from '../js/exercises.js';
 import { LESSONS } from '../js/data/lessons.js';
 import { PLAN } from '../js/data/plan.js';
+import { readFileSync, readdirSync } from 'node:fs';
 
 const T = '2026-10-02';
 
@@ -145,4 +146,15 @@ test('plan: 8 semanas; lecciones referidas existen', () => {
   for (const w of PLAN) for (const id of w.lessons || []) assert.ok(ids.has(id));
   const planned = PLAN.flatMap((w) => w.lessons || []);
   for (const l of LESSONS) assert.ok(planned.includes(l.id), `L${l.id} no está en el plan`);
+});
+
+test('sw.js: cachea todos los js y solo borra sus propias cachés', () => {
+  const sw = readFileSync(new URL('../sw.js', import.meta.url), 'utf8');
+  assert.match(sw, /k\.startsWith\(PREFIX\) && k !== VERSION/);
+  assert.match(sw, /const PREFIX = 'italiano-cesar-'/);
+  const listed = [...sw.matchAll(/'([^']+\.(?:js|css|png|webmanifest|html))'/g)].map((m) => m[1]);
+  const walk = (d) => readdirSync(new URL(`../${d}`, import.meta.url), { withFileTypes: true })
+    .flatMap((e) => (e.isDirectory() ? walk(`${d}/${e.name}`) : e.name.endsWith('.js') ? [`${d}/${e.name}`] : []));
+  for (const f of walk('js')) assert.ok(listed.includes(f), `sw.js no cachea ${f}`);
+  for (const f of listed) assert.ok(readFileSync(new URL(`../${f}`, import.meta.url)), `sw.js lista ${f} pero no existe`);
 });
