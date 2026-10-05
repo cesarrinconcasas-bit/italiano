@@ -62,7 +62,7 @@ export const PLAN = [
       'Registrarte en el hotel y resolver problemas de la habitación.',
       'Hablar del clima y elegir qué ropa llevar.',
     ],
-    lessons: [],
+    lessons: [13, 14, 15, 16],
   },
   {
     week: 5,
