@@ -39,7 +39,7 @@ export const PLAN = [
       'Entender precios y pagar con tarjeta o en efectivo.',
       'Pedir helado y pizza como un italiano.',
     ],
-    lessons: [],
+    lessons: [5, 6, 7, 8],
   },
   {
     week: 3,
